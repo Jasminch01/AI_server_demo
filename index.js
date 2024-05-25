@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 const port = 5000;
 const corsOptions = {
-  origin: ["http://localhost:3000", 'http://localhost:5173', 'https://665179c89c181fee8e8e15c1--cozy-smakager-1ec4ba.netlify.app/'],
+  origin: ["http://localhost:3000", 'http://localhost:5173', 'https://66517ce739c2b0efecabbd34--cozy-smakager-1ec4ba.netlify.app'],
   credentials: true,
   optionSuccessStatus: 200,
 };
