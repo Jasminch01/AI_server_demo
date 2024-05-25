@@ -6,12 +6,8 @@ const cors = require("cors");
 dotenv.config();
 const app = express();
 const port = 5000;
-const corsOptions = {
-  origin: ["http://localhost:3000", 'http://localhost:5173', 'https://cozy-smakager-1ec4ba.netlify.app/'],
-  credentials: true,
-};
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 // const model = "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4"
 const model =
