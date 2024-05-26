@@ -51,7 +51,7 @@ app.post("/generate-image", async (req, res) => {
   const { image, propmt } = req.body;
   async () => {
     try {
-      const result = await replicate.run(model, { input: { image } }); // Pass input object to model
+      // const result = await replicate.run(model, { input: { image } }); // Pass input object to model
       // const input2 = {
       //   // pixel: "512 * 512",
       //   // scale: 3,
@@ -65,7 +65,7 @@ app.post("/generate-image", async (req, res) => {
 
       // const addBG = await replicate.run(model1, { input: { ...input2 } }); // Combine both inputs
 
-      res.status(200).json({ output: result });
+      res.status(200).json({ output: image });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
