@@ -16,7 +16,7 @@ app.use(express.json());
 // );
 
 app.use(cors({
-  origin: '*', // Allow all origins
+  origin: 'http://localhost:5173', // Allow all origins
   credentials: true, // Allow credentials
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
