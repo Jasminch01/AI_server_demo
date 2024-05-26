@@ -50,7 +50,7 @@ app.get("/hello", async (req, res) => {
 app.post("/generate-image", async (req, res) => {
   try {
     const { image, propmt } = req.body;
-    const result = await replicate.run(model, { input: { image } }); // Pass input object to model
+    const result = await replicate.run(model, { input: { image } });
     const input2 = {
       // pixel: "512 * 512",
       // scale: 3,
@@ -61,10 +61,14 @@ app.post("/generate-image", async (req, res) => {
       negative_prompt:
         "text, watermark, painting, cartoons, sketch,worst quality",
     };
-
-    const addBG = await replicate.run(model1, { input: { ...input2 } }); // Combine both inputs
-
-    res.status(200).json({ output: addBG });
+    try {
+      const addBG = await replicate.run(model1, { input: { ...input2 } });
+      res.status(200).json({ output: addBG });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ error: "Error adding background: " + error.message });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
