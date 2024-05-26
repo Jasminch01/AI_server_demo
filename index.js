@@ -40,6 +40,13 @@ app.get("/", (req, res) => {
   res.send("YOU ARE ONLINE");
 });
 
+app.get('/hello', async(req, res) => {
+  res.status(200).json({
+    success : true,
+    message : "hello world"
+  })
+})
+
 app.post("/generate-image", async (req, res) => {
   const { image, propmt } = req.body;
 
@@ -56,12 +63,9 @@ app.post("/generate-image", async (req, res) => {
         "text, watermark, painting, cartoons, sketch,worst quality",
     };
 
-    console.log(input2);
     const addBG = await replicate.run(model1, { input: { ...input2 } }); // Combine both inputs
 
-    console.log(addBG);
-
-    res.json({ output: addBG });
+    res.status(200).json({ output: addBG });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
