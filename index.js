@@ -61,14 +61,9 @@ app.post("/generate-image", async (req, res) => {
       negative_prompt:
         "text, watermark, painting, cartoons, sketch,worst quality",
     };
-    try {
-      const addBG = await replicate.run(model1, { input: { ...input2 } });
-      res.status(200).json({ output: addBG });
-    } catch (error) {
-      return res
-        .status(500)
-        .json({ error: "Error adding background: " + error.message });
-    }
+    // const addBG = await replicate.run(model1, { input: { ...input2 } });
+
+    res.status(200).json({ output: input2 });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
