@@ -61,7 +61,27 @@ app.post("/generate-image", async (req, res) => {
       negative_prompt:
         "text, watermark, painting, cartoons, sketch,worst quality",
     };
-    const addBG = await replicate.run(model1, { input: { ...input2 } });
+
+    const addBackgroundWithPromise = (input) => {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const addBG = await replicate.run(model1, { input });
+          resolve(addBG);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    };
+
+    addBackgroundWithPromise(input2)
+      .then((addBG) => {
+        res.status(200).json({ output: addBG });
+      })
+      .catch((error) => {
+        res
+          .status(500)
+          .json({ error: "Error adding background: " + error.message });
+      });
 
     res.status(200).json({ output: addBG });
   } catch (error) {
