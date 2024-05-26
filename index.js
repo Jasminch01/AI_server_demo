@@ -48,28 +48,26 @@ app.get("/hello", async (req, res) => {
 });
 
 app.post("/generate-image", async (req, res) => {
-  const { image, propmt } = req.body;
-  async () => {
-    try {
-      // const result = await replicate.run(model, { input: { image } }); // Pass input object to model
-      // const input2 = {
-      //   // pixel: "512 * 512",
-      //   // scale: 3,
-      //   prompt: propmt,
-      //   // image_num: 2,
-      //   image_path: result,
-      //   // product_size: "0.5 * width",
-      //   negative_prompt:
-      //     "text, watermark, painting, cartoons, sketch,worst quality",
-      // };
+  try {
+    const { image, propmt } = req.body;
+    // const result = await replicate.run(model, { input: { image } }); // Pass input object to model
+    // const input2 = {
+    //   // pixel: "512 * 512",
+    //   // scale: 3,
+    //   prompt: propmt,
+    //   // image_num: 2,
+    //   image_path: result,
+    //   // product_size: "0.5 * width",
+    //   negative_prompt:
+    //     "text, watermark, painting, cartoons, sketch,worst quality",
+    // };
 
-      // const addBG = await replicate.run(model1, { input: { ...input2 } }); // Combine both inputs
+    // const addBG = await replicate.run(model1, { input: { ...input2 } }); // Combine both inputs
 
-      res.status(200).json({ output: image });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  };
+    res.status(200).json({ output: image });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(port, () => {
