@@ -7,7 +7,14 @@ dotenv.config();
 const app = express();
 const port = 5000;
 app.use(express.json());
-app.use(cors({origin : ['https://cozy-smakager-1ec4ba.netlify.app'], credentials : true}));
+
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
 
 // const model = "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4"
 const model =
@@ -25,7 +32,7 @@ app.get("/", (req, res) => {
 
 app.post("/generate-image", async (req, res) => {
   const { image, propmt } = req.body;
-  
+
   try {
     const result = await replicate.run(model, { input: { image } }); // Pass input object to model
     const input2 = {
@@ -35,13 +42,14 @@ app.post("/generate-image", async (req, res) => {
       // image_num: 2,
       image_path: result,
       // product_size: "0.5 * width",
-      negative_prompt : "text, watermark, painting, cartoons, sketch,worst quality"
+      negative_prompt:
+        "text, watermark, painting, cartoons, sketch,worst quality",
     };
 
     console.log(input2);
     const addBG = await replicate.run(model1, { input: { ...input2 } }); // Combine both inputs
 
-    console.log(addBG)
+    console.log(addBG);
 
     res.json({ output: addBG });
   } catch (error) {
