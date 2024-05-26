@@ -8,19 +8,23 @@ const app = express();
 const port = 5000;
 app.use(express.json());
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173",
-//     credentials : true,
-//   })
-// );
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-  ],
-  credentials : true
-}));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
 
 // const model = "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4"
 const model =
