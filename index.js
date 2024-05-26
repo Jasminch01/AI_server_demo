@@ -15,16 +15,12 @@ app.use(express.json());
 //   })
 // );
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // Allow requests with no origin like mobile apps or curl requests
-      if (!origin) return callback(null, true);
-      callback(null, origin);
-    },
-    credentials: true, // Allow credentials
-  })
-);
+app.use(cors({
+  origin: '*', // Allow all origins
+  credentials: true, // Allow credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+}));
 
 // const model = "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4"
 const model =
