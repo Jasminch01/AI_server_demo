@@ -44,14 +44,14 @@ app.post("/generate-image", async (req, res) => {
     const { image, propmt } = req.body;
     const result = await replicate.run(model, { input: { image } });
     const input2 = {
-      prompt: propmt,
-      image_num: 4,
       image_path: result,
+      prompt: propmt,
+      negative_prompt:
+        "text, watermark, painting, cartoons, sketch, worst quality, blurry, dark, cluttered, low-resolution, inappropriate fonts, irrelevant elements",
+      image_num: 4,
       guidance_scale : 7.5,
       num_inference_steps : 20,
       manual_seed : -1,
-      negative_prompt:
-        "text, watermark, painting, cartoons, sketch, worst quality, blurry, dark, cluttered, low-resolution, inappropriate fonts, irrelevant elements",
     };
     const addBG = await replicate.run(model1, { input: { ...input2 } });
 
