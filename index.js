@@ -45,10 +45,15 @@ app.post("/generate-image", async (req, res) => {
     const result = await replicate.run(model, { input: { image } });
     const input2 = {
       // pixel: "512 * 512",
-      scale: 3,
+      // scale: 3,
+      seed: 24603,
       prompt: propmt,
-      image_num: 4,
-      image_path: result,
+      // image_num: 4,
+      apply_img: false,
+    product_fill: "80",
+    condition_scale: 0.8,
+    num_refine_steps: 20,
+      image: result,
       // product_size: "0.5 * width",
       negative_prompt:
         "text, watermark, painting, cartoons, sketch, worst quality, blurry, dark, cluttered, low-resolution, inappropriate fonts, irrelevant elements",
